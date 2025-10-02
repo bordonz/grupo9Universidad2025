@@ -12,8 +12,10 @@ public class MiConexion {
 
     private static Connection conexion = null;
 
-    public MiConexion(String url, String usr, String pass) {
-
+    public MiConexion(String url, String usuario, String password) {
+        this.url = url;
+        this.usuario = usuario;
+        this.password = password;
     }
 
     public Connection buscarConexion() {

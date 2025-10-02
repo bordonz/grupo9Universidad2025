@@ -18,13 +18,13 @@ public class AlumnoData {
     }
 
     public boolean alumnoNuevo(Alumno a) {
-        String query = "INSERT INTO alumno (dni, apellido, nombre, fecha, estado) VALUES(?, ?, ?, ?, ?)";
+        String query = "INSERT INTO alumno (dni, apellido, nombre, fechaNacimiento, estado) VALUES(?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = conec.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, a.getDni());
             ps.setString(2, a.getApellido());
             ps.setString(3, a.getNombre());
-            ps.setDate(4, Date.valueOf(a.getFechaDeNacimiento()));
+            ps.setDate(4, Date.valueOf(a.getFechaNacimiento()));
             ps.setBoolean(5, a.isEstado());
             ps.executeUpdate();
 
@@ -57,7 +57,7 @@ public class AlumnoData {
                 a.setDni(rs.getInt("dni"));
                 a.setApellido(rs.getString("apellido"));
                 a.setNombre(rs.getString("nombre"));
-                a.setFechaDeNacimiento(rs.getDate("fecha").toLocalDate());
+                a.setFechaNacimiento(rs.getDate("fecha").toLocalDate());
                 a.setEstado(rs.getBoolean("estado"));
             }
             ps.close();
