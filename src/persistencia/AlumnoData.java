@@ -57,7 +57,7 @@ public class AlumnoData {
                 a.setDni(rs.getInt("dni"));
                 a.setApellido(rs.getString("apellido"));
                 a.setNombre(rs.getString("nombre"));
-                a.setFechaNacimiento(rs.getDate("fecha").toLocalDate());
+                a.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
                 a.setEstado(rs.getBoolean("estado"));
             }
             ps.close();
