@@ -19,9 +19,9 @@ public class Main {
         
         //alumnoD.alumnoNuevo(alumno0);
         //alumnoD.alumnoNuevo(alumno1);
-//        alumnoD.alumnoNuevo(alumno2);
-//        alumnoD.alumnoNuevo(alumno3);
-//        alumnoD.alumnoNuevo(alumno4);
+        // alumnoD.alumnoNuevo(alumno2);
+        //alumnoD.alumnoNuevo(alumno3);
+        //alumnoD.alumnoNuevo(alumno4);
 
         System.out.println("Alumno: " + alumnoD.buscarAlumno(1));
         System.out.println("Alumno: " + alumnoD.buscarAlumno(3));
