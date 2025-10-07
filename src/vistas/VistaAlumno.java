@@ -58,6 +58,11 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableAlumno = new javax.swing.JTable();
         jdcFecha = new com.toedter.calendar.JDateChooser();
+        jbActualizar = new javax.swing.JButton();
+        jbEliminar = new javax.swing.JButton();
+        jbAlta_baja = new javax.swing.JButton();
+        jbBuscar = new javax.swing.JButton();
+        jbListar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(102, 102, 102));
         setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 102, 0), new java.awt.Color(0, 102, 0)));
@@ -159,58 +164,107 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTableAlumno);
 
+        jbActualizar.setBackground(new java.awt.Color(0, 102, 0));
+        jbActualizar.setForeground(new java.awt.Color(255, 255, 255));
+        jbActualizar.setText("Actualizar");
+        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarActionPerformed(evt);
+            }
+        });
+
+        jbEliminar.setBackground(new java.awt.Color(0, 102, 0));
+        jbEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        jbEliminar.setText("Eliminar");
+
+        jbAlta_baja.setBackground(new java.awt.Color(0, 102, 0));
+        jbAlta_baja.setForeground(new java.awt.Color(255, 255, 255));
+        jbAlta_baja.setText("Baja/Alta");
+        jbAlta_baja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAlta_bajaActionPerformed(evt);
+            }
+        });
+
+        jbBuscar.setBackground(new java.awt.Color(0, 102, 0));
+        jbBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        jbBuscar.setText("Buscar");
+
+        jbListar.setBackground(new java.awt.Color(0, 102, 0));
+        jbListar.setForeground(new java.awt.Color(255, 255, 255));
+        jbListar.setText("Ver");
+        jbListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbListarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(60, 60, 60)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jlIdAlumno)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtfIdAlumno))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jbGuardar)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jlSeleccione)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cbMetodos, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(2, 2, 2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlApellido)
-                                    .addComponent(jlFecha))
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtfApellido)
-                                    .addComponent(jdcFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
+                                .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbActualizar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbEliminar))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jlIdAlumno)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jtfIdAlumno))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jlApellido)
+                                        .addComponent(jlFecha))
+                                    .addGap(30, 30, 30)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jtfApellido)
+                                        .addComponent(jdcFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel1)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jlSeleccione)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(cbMetodos, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(56, 56, 56))))
+                        .addGap(13, 13, 13)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jlDni)
                                     .addComponent(jlNombre))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jtfNombre)
-                                    .addComponent(jtfDni, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)))
+                                    .addComponent(jtfDni))
+                                .addGap(27, 27, 27))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
+                                .addGap(17, 17, 17)
                                 .addComponent(jlEstado)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(29, 29, 29)
                                 .addComponent(jrbActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jrbInactivo, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(65, 65, 65)
+                                .addComponent(jrbInactivo, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbAlta_baja, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbListar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(54, 54, 54))
+                                .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,8 +301,13 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardar)
-                    .addComponent(jbLimpiar))
-                .addContainerGap(15, Short.MAX_VALUE))
+                    .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbActualizar)
+                    .addComponent(jbEliminar)
+                    .addComponent(jbAlta_baja)
+                    .addComponent(jbBuscar)
+                    .addComponent(jbListar))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -259,7 +318,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfDniActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        try {
+        try {   
         int dni = Integer.parseInt(jtfDni.getText());
         String apellido = jtfApellido.getText();
         String nombre = jtfNombre.getText();
@@ -337,6 +396,13 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                 jdcFecha.setEnabled(true);
                 jrbActivo.setEnabled(true);
                 jrbInactivo.setEnabled(true);
+                jbActualizar.setEnabled(false);
+                jbAlta_baja.setEnabled(false);
+                jbBuscar.setEnabled(false);
+                jbEliminar.setEnabled(false);
+                jbListar.setEnabled(false);
+                jbGuardar.setEnabled(true);
+                
                 break;
             case "Actualizar":
                 jtfDni.setEnabled(true);
@@ -345,7 +411,14 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                 jdcFecha.setEnabled(true);
                 jrbActivo.setEnabled(true);
                 jrbInactivo.setEnabled(true); 
+                jbGuardar.setEnabled(false);
+                jbAlta_baja.setEnabled(false);
+                jbBuscar.setEnabled(false);
+                jbEliminar.setEnabled(false);
+                jbListar.setEnabled(false);
+                jbActualizar.setEnabled(true);
                 break;
+                
             case "Borrar":
                 jtfIdAlumno.setEnabled(true);
                 jtfDni.setEnabled(false);
@@ -353,8 +426,16 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                 jtfNombre.setEnabled(false);
                 jdcFecha.setEnabled(false);
                 jrbActivo.setEnabled(false);
-                jrbInactivo.setEnabled(false); 
+                jrbInactivo.setEnabled(false);
+                jbGuardar.setEnabled(false);
+                jbAlta_baja.setEnabled(false);
+                jbBuscar.setEnabled(false);
+                jbActualizar.setEnabled(false);
+                jbListar.setEnabled(false);
+                jbEliminar.setEnabled(true);
+                
                 break;
+                
             case "Baja / alta logica":
                 jtfIdAlumno.setEnabled(true);
                 jtfDni.setEnabled(false);
@@ -363,6 +444,12 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                 jdcFecha.setEnabled(false);
                 jrbActivo.setEnabled(true);
                 jrbInactivo.setEnabled(true);
+                jbGuardar.setEnabled(false);
+                jbActualizar.setEnabled(false);
+                jbBuscar.setEnabled(false);
+                jbEliminar.setEnabled(false);
+                jbListar.setEnabled(false);
+                jbAlta_baja.setEnabled(true);
                 break;
             case "Buscar":
                 jtfIdAlumno.setEnabled(true);
@@ -372,7 +459,14 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                 jdcFecha.setEnabled(false);
                 jrbActivo.setEnabled(false);
                 jrbInactivo.setEnabled(false);
+                jbGuardar.setEnabled(false);
+                jbAlta_baja.setEnabled(false);
+                jbActualizar.setEnabled(false);
+                jbEliminar.setEnabled(false);
+                jbListar.setEnabled(false);
+                jbBuscar.setEnabled(true);
                 break;
+                
             case "Listar":
                 jtfIdAlumno.setEnabled(false);
                 jtfDni.setEnabled(false);
@@ -381,9 +475,27 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                 jdcFecha.setEnabled(false);
                 jrbActivo.setEnabled(false);
                 jrbInactivo.setEnabled(false);
-                break;
+                jbGuardar.setEnabled(false);
+                jbAlta_baja.setEnabled(false);
+                jbBuscar.setEnabled(false);
+                jbEliminar.setEnabled(false);
+                jbActualizar.setEnabled(false);
+                jbListar.setEnabled(true);
+                break;      
             }
     }//GEN-LAST:event_cbMetodosActionPerformed
+
+    private void jbListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbListarActionPerformed
+
+    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbActualizarActionPerformed
+
+    private void jbAlta_bajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlta_bajaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbAlta_bajaActionPerformed
 
     public void cargarCombo(){  
         cbMetodos.addItem("Cargar Alumno");
@@ -410,8 +522,13 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableAlumno;
+    private javax.swing.JButton jbActualizar;
+    private javax.swing.JButton jbAlta_baja;
+    private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbLimpiar;
+    private javax.swing.JButton jbListar;
     private com.toedter.calendar.JDateChooser jdcFecha;
     private javax.swing.JLabel jlApellido;
     private javax.swing.JLabel jlDni;
