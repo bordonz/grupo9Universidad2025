@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.naming.spi.DirStateFactory;
 
 public class AlumnoData {
@@ -66,5 +67,28 @@ public class AlumnoData {
         }
         return a;
     }
-
+    
+        public ArrayList<Alumno> listarAlumnos(){
+        Alumno a = null;
+        ArrayList<Alumno> alumnos = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM alumno";
+            PreparedStatement ps = conec.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                a = new Alumno();
+                a.setIdAlumno(rs.getInt("idAlumno"));
+                a.setDni(rs.getInt("dni"));
+                a.setApellido(rs.getString("Apellido"));
+                a.setNombre(rs.getString("nombre"));
+                a.setFechaNacimiento(rs.getDate("FechaNacimiento").toLocalDate());
+                a.setEstado(rs.getBoolean("estado"));
+                alumnos.add(a);
+            }
+            ps.close();
+        }catch(SQLException e){
+            e.getMessage();
+        }
+        return alumnos;
+    }
 }
