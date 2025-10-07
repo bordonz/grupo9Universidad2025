@@ -68,7 +68,7 @@ public class AlumnoData {
         return a;
     }
     
-        public ArrayList<Alumno> listarAlumnos(){
+    public ArrayList<Alumno> listarAlumnos(){
         Alumno a = null;
         ArrayList<Alumno> alumnos = new ArrayList<>();
         try {
@@ -79,9 +79,9 @@ public class AlumnoData {
                 a = new Alumno();
                 a.setIdAlumno(rs.getInt("idAlumno"));
                 a.setDni(rs.getInt("dni"));
-                a.setApellido(rs.getString("Apellido"));
+                a.setApellido(rs.getString("apellido"));
                 a.setNombre(rs.getString("nombre"));
-                a.setFechaNacimiento(rs.getDate("FechaNacimiento").toLocalDate());
+                a.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
                 a.setEstado(rs.getBoolean("estado"));
                 alumnos.add(a);
             }
