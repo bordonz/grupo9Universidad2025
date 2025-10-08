@@ -48,7 +48,7 @@ public class MateriaData {
 
     public void modificarMateria(Materia materia) {
 
-        String sql = "UPDATE materia SET nombre=?, anio=? WHERE idMateria =?";
+        String sql = "UPDATE materia SET nombre=?, año=? WHERE idMateria =?";
 
         try {
             PreparedStatement ps;
@@ -82,7 +82,7 @@ public class MateriaData {
     }
 
     public Materia buscarMateria(int id) {
-        String sql = "SELECT nombre, anio FROM materia WHERE idMateria = ? AND estado = 1";
+        String sql = "SELECT nombre, año FROM materia WHERE idMateria = ? AND estado = 1";
         Materia materia = null;
 
         try {
@@ -93,7 +93,7 @@ public class MateriaData {
                 materia = new Materia();
                 materia.setIdMateria(id);
                 materia.setNombre(rs.getString("nombre"));
-                materia.setAnio(rs.getInt("anio"));
+                materia.setAnio(rs.getInt("año"));
                 materia.setEstado(true);
             } else {
                 JOptionPane.showMessageDialog(null, "No existe esa materia");
@@ -110,7 +110,7 @@ public class MateriaData {
 
     public List<Materia> listarMaterias() {
 
-        String sql = "SELECT idMateria, nombre, anio FROM materia WHERE estado = 1";
+        String sql = "SELECT idMateria, nombre, año FROM materia WHERE estado = 1";
         ArrayList<Materia> materias = new ArrayList<>();
 
         try {
@@ -121,7 +121,7 @@ public class MateriaData {
                 Materia materia = new Materia();
                 materia.setIdMateria(rs.getInt("IdMateria"));
                 materia.setNombre(rs.getString("nombre"));
-                materia.setAnio(rs.getInt("anio"));
+                materia.setAnio(rs.getInt("año"));
                 materia.setEstado(true);
 
                 materias.add(materia);
