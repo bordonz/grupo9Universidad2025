@@ -339,30 +339,13 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
             estado = false;    
         }
         
-        MiConexion conexionVista = new MiConexion("jdbc:mariadb://localhost:3306/gp9universidad", "root", "");
-        AlumnoData alumnoD = new AlumnoData(conexionVista);
-        String opcionesCombo = (String)cbMetodos.getSelectedItem();
-        
-        
-        switch(opcionesCombo) {
-            case "Cargar Alumno":
-                Alumno alumno = new Alumno(dni, apellido, nombre, fecha, estado);
-                if (alumnoD.alumnoNuevo(alumno)) {
-                    JOptionPane.showMessageDialog(this, "Alumno guardado");
-                } else {
-                    JOptionPane.showMessageDialog(this, "El alumno ya existe");
-                }
-            case "Actualizar":
-
-            case "Borrar":
-
-            case "Baja / alta logica":
-
-            case "Buscar":
-
-            case "Listar":
-
-        }
+        Alumno alumno = new Alumno(dni, apellido, nombre, fecha, estado);
+            if (alumnoD.alumnoNuevo(alumno)) {
+                JOptionPane.showMessageDialog(this, "Alumno guardado");
+            } else {
+                JOptionPane.showMessageDialog(this, "El alumno ya existe");
+            }
+ 
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(this, "Error, formato incorrecto");
         }        
@@ -497,11 +480,9 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
     private void jbListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListarActionPerformed
         //Del rs traemos los traemos y agregamos a un arraylist,
         //luego los recorremos y asignamos a las filas de la tabla
-        
-//        MiConexion conex = new MiConexion("jdbc:mariadb://localhost:3306/ulp2025gp9", "root", "");
-//        AlumnoData alumnosAListar = new AlumnoData(conex);
+
         ArrayList<Alumno> listaAlumnos = new ArrayList();
-        listaAlumnos = alumnosAListar.listarAlumnos();
+        listaAlumnos = alumnoD.listarAlumnos();
         for(Alumno aux : listaAlumnos){
             modeloTabla.addRow(new Object [] {
                 aux.getIdAlumno(),
