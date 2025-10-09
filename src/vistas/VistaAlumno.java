@@ -338,6 +338,10 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Los campos no pueden estar vacios");
             return;
         }
+        if (!jrbInactivo.isSelected()||jrbActivo.isSelected()) {
+            JOptionPane.showMessageDialog(this, "No tiene estado alguno");
+            return;
+        }
         try {   
         int dni = Integer.parseInt(jtfDni.getText());
         String apellido = jtfApellido.getText();
@@ -349,11 +353,6 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         }else{
             estado = false;    
         }
-        
-         if (!jrbInactivo.isSelected()||jrbActivo.isSelected()) {
-               JOptionPane.showMessageDialog(this, "No tiene estado alguno");
-               return;
-           }
         
         Alumno alumno = new Alumno(dni, apellido, nombre, fecha, estado);
             if (alumnoD.alumnoNuevo(alumno)) {

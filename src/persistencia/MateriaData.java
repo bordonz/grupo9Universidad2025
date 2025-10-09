@@ -24,7 +24,7 @@ public class MateriaData {
         this.conec = conexion.buscarConexion();
     }
 
-    public void materiaNueva(Materia m) {
+    public boolean materiaNueva(Materia m) {
         String query = "INSERT INTO materia (nombre, año, estado) VALUES(?, ?, ?)";
         try {
             PreparedStatement ps = conec.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -41,8 +41,10 @@ public class MateriaData {
             }
             ps.close();
             System.out.println("Se guardo la materia correctamente.");
+            return true;
         } catch (SQLException e) {
             System.out.println("No se pudo agregar la materia");
+            return false;
         }
     }
 
@@ -110,7 +112,7 @@ public class MateriaData {
 
     public List<Materia> listarMaterias() {
 
-        String sql = "SELECT idMateria, nombre, año FROM materia WHERE estado = 1";
+        String sql = "SELECT idMateria, nombre, año, estado FROM materia WHERE estado = 1";
         ArrayList<Materia> materias = new ArrayList<>();
 
         try {
