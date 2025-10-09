@@ -516,7 +516,22 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbListarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
-        // TODO add your handling code here:
+          try {
+            if (jtfDni.getText().trim().isEmpty() || jtfApellido.getText().trim().isEmpty()
+                    || jtfNombre.getText().trim().isEmpty() || jdcFecha.getDate() == null) {
+                JOptionPane.showMessageDialog(this, "No se puedo realizar la actulizacion. Los campos no pueden estar vacios");
+                return;
+            } else {
+                JOptionPane.showMessageDialog(this, "Alumno actualizado correctamente");
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error.");
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Debe completar todos los campos");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al actualizar: " + e.getMessage());
+        }
     }//GEN-LAST:event_jbActualizarActionPerformed
 
     private void jbAlta_bajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlta_bajaActionPerformed
