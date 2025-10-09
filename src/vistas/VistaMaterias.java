@@ -8,6 +8,7 @@ package vistas;
 import entidades.Alumno;
 import entidades.Materia;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import persistencia.AlumnoData;
@@ -430,8 +431,8 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jrbActivoActionPerformed
 
     private void jbListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListarActionPerformed
-        ArrayList<Materia> listaDeMaterias = new ArrayList();
-        materiaD.listarMaterias();
+       List<Materia> listaDeMaterias = new ArrayList();
+       listaDeMaterias = materiaD.listarMaterias();
         for(Materia aux : listaDeMaterias){
             modeloMaterias.addRow(new Object [] {
                 aux.getIdMateria(),
