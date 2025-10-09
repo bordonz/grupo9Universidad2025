@@ -327,6 +327,12 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfDniActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        //Validacion de campos vacios
+        if(jtfDni.getText().trim().isEmpty() || jtfApellido.getText().trim().isEmpty() ||
+            jtfNombre.getText().trim().isEmpty() || jdcFecha.getDate() == null){
+            JOptionPane.showMessageDialog(this, "Los campos no pueden estar vacios");
+            return;
+        }
         try {   
         int dni = Integer.parseInt(jtfDni.getText());
         String apellido = jtfApellido.getText();
@@ -345,17 +351,9 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "El alumno ya existe");
             }
- 
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(this, "Error, formato incorrecto");
         }        
-        
-//            //Validacion de campos vacios
-//            if(jtfDni.getText().trim().isEmpty() || jtfApellido.getText().trim().isEmpty() ||
-//                jtfNombre.getText().trim().isEmpty() || jdcFecha.getDate() == null){
-//                JOptionPane.showMessageDialog(this, "Los campos no pueden estar vacios");
-//                return;
-//            }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jtfApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfApellidoActionPerformed
