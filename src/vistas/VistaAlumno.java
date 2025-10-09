@@ -339,6 +339,11 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
             estado = false;    
         }
         
+         if (!jrbInactivo.isSelected()||jrbActivo.isSelected()) {
+               JOptionPane.showMessageDialog(this, "No tiene estado alguno");
+               return;
+           }
+        
         Alumno alumno = new Alumno(dni, apellido, nombre, fecha, estado);
             if (alumnoD.alumnoNuevo(alumno)) {
                 JOptionPane.showMessageDialog(this, "Alumno guardado");

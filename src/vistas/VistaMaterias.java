@@ -146,6 +146,11 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
         jbActualizar.setBackground(new java.awt.Color(0, 102, 0));
         jbActualizar.setForeground(new java.awt.Color(255, 255, 255));
         jbActualizar.setText("Actualizar");
+        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarActionPerformed(evt);
+            }
+        });
 
         jbBuscar.setBackground(new java.awt.Color(0, 102, 0));
         jbBuscar.setForeground(new java.awt.Color(255, 255, 255));
@@ -423,6 +428,29 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
     private void jbListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jbListarActionPerformed
+
+    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
+       try {
+            if (jtfIdMateria.getText().trim().isEmpty() || jtfNombre.getText().trim().isEmpty()
+                    || jtfAnio.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No se puedo realizar la actulizacion. Los campos no pueden estar vacios");
+                return;
+            } else {
+                JOptionPane.showMessageDialog(this, "Materia actualizado correctamente");
+            }
+            if (!jrbInactivo.isSelected()||jrbActivo.isSelected()) {
+               JOptionPane.showMessageDialog(this, "No tiene estado alguno");
+               return;
+           }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error.");
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Debe completar todos los campos");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al actualizar: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jbActualizarActionPerformed
 
     public void cargarCombo(){  
         cbMetodos.addItem("Cargar Materia");
