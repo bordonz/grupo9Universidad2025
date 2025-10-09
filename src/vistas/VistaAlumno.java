@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import persistencia.AlumnoData;
 import persistencia.MiConexion;
+
 /**
  *
  * @author pc
@@ -24,7 +25,8 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
      */
     MiConexion conex = new MiConexion("jdbc:mariadb://localhost:3306/ulp2025gp9", "root", "");
     AlumnoData alumnoD = new AlumnoData(conex);
-    private DefaultTableModel modeloTabla= new DefaultTableModel();
+    private DefaultTableModel modeloTabla = new DefaultTableModel();
+
     public VistaAlumno() {
         initComponents();
         cargarCombo();
@@ -333,37 +335,37 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         //Validacion de campos vacios
-        if(jtfDni.getText().trim().isEmpty() || jtfApellido.getText().trim().isEmpty() ||
-            jtfNombre.getText().trim().isEmpty() || jdcFecha.getDate() == null){
+        if (jtfDni.getText().trim().isEmpty() || jtfApellido.getText().trim().isEmpty()
+                || jtfNombre.getText().trim().isEmpty() || jdcFecha.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Los campos no pueden estar vacios");
             return;
         }
-        try {   
-        int dni = Integer.parseInt(jtfDni.getText());
-        String apellido = jtfApellido.getText();
-        String nombre = jtfNombre.getText();
-        LocalDate fecha = jdcFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        Boolean estado;
-        if(jrbActivo.isSelected()){
-            estado = true;
-        }else{
-            estado = false;    
-        }
-        
-         if (!jrbInactivo.isSelected()||jrbActivo.isSelected()) {
-               JOptionPane.showMessageDialog(this, "No tiene estado alguno");
-               return;
-           }
-        
-        Alumno alumno = new Alumno(dni, apellido, nombre, fecha, estado);
+        try {
+            int dni = Integer.parseInt(jtfDni.getText());
+            String apellido = jtfApellido.getText();
+            String nombre = jtfNombre.getText();
+            LocalDate fecha = jdcFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Boolean estado;
+            if (jrbActivo.isSelected()) {
+                estado = true;
+            } else {
+                estado = false;
+            }
+
+            if (!jrbInactivo.isSelected() || jrbActivo.isSelected()) {
+                JOptionPane.showMessageDialog(this, "No tiene estado alguno");
+                return;
+            }
+
+            Alumno alumno = new Alumno(dni, apellido, nombre, fecha, estado);
             if (alumnoD.alumnoNuevo(alumno)) {
                 JOptionPane.showMessageDialog(this, "Alumno guardado");
             } else {
                 JOptionPane.showMessageDialog(this, "El alumno ya existe");
             }
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Error, formato incorrecto");
-        }        
+        }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jtfApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfApellidoActionPerformed
@@ -386,9 +388,9 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
 
     private void cbMetodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMetodosActionPerformed
         //Dependiendo de que seleccione se activan y desactivan x campos
-        String opciones = (String)cbMetodos.getSelectedItem();
-        
-        switch(opciones){
+        String opciones = (String) cbMetodos.getSelectedItem();
+
+        switch (opciones) {
             case "Cargar Alumno":
                 jtfDni.setEnabled(true);
                 jtfApellido.setEnabled(true);
@@ -402,7 +404,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                 jbEliminar.setEnabled(false);
                 jbListar.setEnabled(false);
                 jbGuardar.setEnabled(true);
-                
+
                 break;
             case "Actualizar":
                 jtfDni.setEnabled(true);
@@ -410,7 +412,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                 jtfNombre.setEnabled(true);
                 jdcFecha.setEnabled(true);
                 jrbActivo.setEnabled(true);
-                jrbInactivo.setEnabled(true); 
+                jrbInactivo.setEnabled(true);
                 jbGuardar.setEnabled(false);
                 jbAlta_baja.setEnabled(false);
                 jbBuscar.setEnabled(false);
@@ -418,7 +420,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                 jbListar.setEnabled(false);
                 jbActualizar.setEnabled(true);
                 break;
-                
+
             case "Borrar":
                 jtfIdAlumno.setEnabled(true);
                 jtfDni.setEnabled(false);
@@ -433,9 +435,9 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                 jbActualizar.setEnabled(false);
                 jbListar.setEnabled(false);
                 jbEliminar.setEnabled(true);
-                
+
                 break;
-                
+
             case "Baja / alta logica":
                 jtfIdAlumno.setEnabled(true);
                 jtfDni.setEnabled(false);
@@ -466,7 +468,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                 jbListar.setEnabled(false);
                 jbBuscar.setEnabled(true);
                 break;
-                
+
             case "Listar":
                 jtfIdAlumno.setEnabled(false);
                 jtfDni.setEnabled(false);
@@ -481,8 +483,8 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                 jbEliminar.setEnabled(false);
                 jbActualizar.setEnabled(false);
                 jbListar.setEnabled(true);
-                break;      
-            }
+                break;
+        }
     }//GEN-LAST:event_cbMetodosActionPerformed
 
     private void jbListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListarActionPerformed
@@ -491,8 +493,8 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
 
         ArrayList<Alumno> listaAlumnos = new ArrayList();
         listaAlumnos = alumnoD.listarAlumnos();
-        for(Alumno aux : listaAlumnos){
-            modeloTabla.addRow(new Object [] {
+        for (Alumno aux : listaAlumnos) {
+            modeloTabla.addRow(new Object[]{
                 aux.getIdAlumno(),
                 aux.getDni(),
                 aux.getApellido(),
@@ -501,13 +503,12 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                 aux.isEstado()
             });
         }
-        
-       
+
 
     }//GEN-LAST:event_jbListarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
-          try {
+        try {
             if (jtfDni.getText().trim().isEmpty() || jtfApellido.getText().trim().isEmpty()
                     || jtfNombre.getText().trim().isEmpty() || jdcFecha.getDate() == null) {
                 JOptionPane.showMessageDialog(this, "No se puedo realizar la actulizacion. Los campos no pueden estar vacios");
@@ -530,25 +531,25 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbAlta_bajaActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-        try{
-        int idAlumno = Integer.parseInt(jtfIdAlumno.getText());
-         int confirmar = JOptionPane.showConfirmDialog(this,
+        try {
+            int idAlumno = Integer.parseInt(jtfIdAlumno.getText());
+            int confirmar = JOptionPane.showConfirmDialog(this,
                     "¿Seguro que desea eliminar el alumno con ID " + idAlumno + "?",
                     "Confirmar eliminación",
                     JOptionPane.YES_NO_OPTION);
-         if (confirmar == JOptionPane.YES_OPTION) {
-            alumnoD.bajaFisicaAlumno(WIDTH);
-             JOptionPane.showMessageDialog(this, "Alumno eliminado correctamente");
-             jtfIdAlumno.setText("");
-        }else{
-          JOptionPane.showMessageDialog(this, "El ID debe ser mayor que 0.");    
-         }
-        }catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
-    }
+            if (confirmar == JOptionPane.YES_OPTION) {
+                alumnoD.bajaFisicaAlumno(idAlumno);
+                JOptionPane.showMessageDialog(this, "Alumno eliminado correctamente");
+                jtfIdAlumno.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "El ID debe ser mayor que 0.");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
+        }
     }//GEN-LAST:event_jbEliminarActionPerformed
 
-    public void cargarCombo(){  
+    public void cargarCombo() {
         cbMetodos.addItem("Cargar Alumno");
         cbMetodos.addItem("Actualizar");
         cbMetodos.addItem("Borrar");
@@ -556,8 +557,8 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         cbMetodos.addItem("Buscar");
         cbMetodos.addItem("Listar");
     }
-    
-    private void tablaCabecera(){
+
+    private void tablaCabecera() {
         modeloTabla.addColumn("IdAlumno");
         modeloTabla.addColumn("Dni");
         modeloTabla.addColumn("Apellido");

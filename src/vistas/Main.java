@@ -29,7 +29,7 @@ public class Main {
         System.out.println("Alumno: " + alumnoD.buscarAlumno(7));
         System.out.println("Alumno: " + alumnoD.buscarAlumno(8));
         
-        
+        alumnoD.bajaFisicaAlumno(3);
     }
     
 }
