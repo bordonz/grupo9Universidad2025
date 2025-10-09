@@ -22,6 +22,8 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
     /**
      * Creates new form CargarAlumno
      */
+    MiConexion conex = new MiConexion("jdbc:mariadb://localhost:3306/ulp2025gp9", "root", "");
+    AlumnoData alumnoD = new AlumnoData(conex);
     private DefaultTableModel modeloTabla= new DefaultTableModel();
     public VistaAlumno() {
         initComponents();
@@ -496,8 +498,8 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         //Del rs traemos los traemos y agregamos a un arraylist,
         //luego los recorremos y asignamos a las filas de la tabla
         
-        MiConexion conex = new MiConexion("jdbc:mariadb://localhost:3306/ulp2025gp9", "root", "");
-        AlumnoData alumnosAListar = new AlumnoData(conex);
+//        MiConexion conex = new MiConexion("jdbc:mariadb://localhost:3306/ulp2025gp9", "root", "");
+//        AlumnoData alumnosAListar = new AlumnoData(conex);
         ArrayList<Alumno> listaAlumnos = new ArrayList();
         listaAlumnos = alumnosAListar.listarAlumnos();
         for(Alumno aux : listaAlumnos){
