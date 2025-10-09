@@ -179,6 +179,11 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         jbEliminar.setBackground(new java.awt.Color(0, 102, 0));
         jbEliminar.setForeground(new java.awt.Color(255, 255, 255));
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jbAlta_baja.setBackground(new java.awt.Color(0, 102, 0));
         jbAlta_baja.setForeground(new java.awt.Color(255, 255, 255));
@@ -523,6 +528,25 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
     private void jbAlta_bajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlta_bajaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jbAlta_bajaActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        try{
+        int idAlumno = Integer.parseInt(jtfIdAlumno.getText());
+         int confirmar = JOptionPane.showConfirmDialog(this,
+                    "¿Seguro que desea eliminar el alumno con ID " + idAlumno + "?",
+                    "Confirmar eliminación",
+                    JOptionPane.YES_NO_OPTION);
+         if (confirmar == JOptionPane.YES_OPTION) {
+            alumnoD.bajaFisicaAlumno(WIDTH);
+             JOptionPane.showMessageDialog(this, "Alumno eliminado correctamente");
+             jtfIdAlumno.setText("");
+        }else{
+          JOptionPane.showMessageDialog(this, "El ID debe ser mayor que 0.");    
+         }
+        }catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
+    }
+    }//GEN-LAST:event_jbEliminarActionPerformed
 
     public void cargarCombo(){  
         cbMetodos.addItem("Cargar Alumno");

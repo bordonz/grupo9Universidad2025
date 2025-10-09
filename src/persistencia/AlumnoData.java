@@ -112,13 +112,13 @@ public class AlumnoData {
        }
     }
         
-    public void bajaFisicaAlumno(Alumno a){
+    public void bajaFisicaAlumno(int id){
         String query = "DELETE FROM alumno WHERE idAlumno = ?";
         try {
             //El prepare es quien enviara con la conec la query
             PreparedStatement ps = conec.prepareStatement(query);
             //Remplaso los comodines y ejecuto y actualizo
-            ps.setInt(1, a.getIdAlumno());
+            ps.setInt(1, id);
             ps.executeUpdate();
             System.out.println("Alumno borrado");
        }catch(SQLException e){
