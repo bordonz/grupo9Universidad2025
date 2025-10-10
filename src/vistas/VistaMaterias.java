@@ -165,6 +165,11 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
         jbEliminar.setBackground(new java.awt.Color(0, 102, 0));
         jbEliminar.setForeground(new java.awt.Color(255, 255, 255));
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jbAlta_baja.setBackground(new java.awt.Color(0, 102, 0));
         jbAlta_baja.setForeground(new java.awt.Color(255, 255, 255));
@@ -326,7 +331,7 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
 
         switch(opciones){
             case "Cargar Materia":
-            jtfIdMateria.setEnabled(true);
+            jtfIdMateria.setEnabled(false);
             jtfNombre.setEnabled(true);
             jtfAnio.setEnabled(true);
             jrbActivo.setEnabled(true);
@@ -466,6 +471,24 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Error al actualizar: " + e.getMessage());
         }
     }//GEN-LAST:event_jbActualizarActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+         try{
+        int idMateria = Integer.parseInt(jtfIdMateria.getText());
+         int confirmar = JOptionPane.showConfirmDialog(this,
+                    "¿Seguro que desea eliminar la materia con ID " + idMateria + "?",
+                    "Confirmar eliminación",
+                    JOptionPane.YES_NO_OPTION);
+         if (confirmar == JOptionPane.YES_OPTION) {
+            materiaD.eliminarMateria(idMateria);
+             jtfIdMateria.setText("");
+        }else{
+          JOptionPane.showMessageDialog(this, "El ID debe ser mayor que 0.");    
+         }
+        }catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
+    }
+    }//GEN-LAST:event_jbEliminarActionPerformed
 
     public void cargarCombo(){  
         cbMetodos.addItem("Cargar Materia");

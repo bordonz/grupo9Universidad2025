@@ -536,7 +536,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                     "Confirmar eliminación",
                     JOptionPane.YES_NO_OPTION);
          if (confirmar == JOptionPane.YES_OPTION) {
-            alumnoD.bajaFisicaAlumno(WIDTH);
+            alumnoD.bajaFisicaAlumno(idAlumno);
              JOptionPane.showMessageDialog(this, "Alumno eliminado correctamente");
              jtfIdAlumno.setText("");
         }else{

@@ -69,9 +69,8 @@ public class MateriaData {
     }
 
     public void eliminarMateria(int id) {
-        String sql = "UPDATE materia SET estado = 0 WHERE idMateria =?";
-
-        try {
+        String sql =  "DELETE FROM materia WHERE idMateria = ?";
+            try {
             PreparedStatement ps = conec.prepareStatement(sql);
             ps.setInt(1, id);
             int exito = ps.executeUpdate();
