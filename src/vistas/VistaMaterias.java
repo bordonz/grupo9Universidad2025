@@ -148,6 +148,11 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
 
         jrbInactivo.setText("Inactivo");
         jrbInactivo.setEnabled(false);
+        jrbInactivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbInactivoActionPerformed(evt);
+            }
+        });
 
         jbActualizar.setBackground(new java.awt.Color(0, 102, 0));
         jbActualizar.setForeground(new java.awt.Color(255, 255, 255));
@@ -172,7 +177,7 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
 
         jbListar.setBackground(new java.awt.Color(0, 102, 0));
         jbListar.setForeground(new java.awt.Color(255, 255, 255));
-        jbListar.setText("Ver");
+        jbListar.setText("Listar");
         jbListar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbListarActionPerformed(evt);
@@ -277,6 +282,7 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+        jtfIdMateria.setText("");
         jtfNombre.setText("");
         jtfAnio.setText("");
         jtfAnio.setText("");
@@ -326,7 +332,7 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
 
         switch(opciones){
             case "Cargar Materia":
-            jtfIdMateria.setEnabled(true);
+            jtfIdMateria.setEnabled(false);
             jtfNombre.setEnabled(true);
             jtfAnio.setEnabled(true);
             jrbActivo.setEnabled(true);
@@ -427,7 +433,7 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfAnioActionPerformed
 
     private void jrbActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbActivoActionPerformed
-        // TODO add your handling code here:
+        jrbInactivo.setSelected(false);
     }//GEN-LAST:event_jrbActivoActionPerformed
 
     private void jbListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListarActionPerformed
@@ -466,6 +472,10 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Error al actualizar: " + e.getMessage());
         }
     }//GEN-LAST:event_jbActualizarActionPerformed
+
+    private void jrbInactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInactivoActionPerformed
+        jrbActivo.setSelected(false);
+    }//GEN-LAST:event_jrbInactivoActionPerformed
 
     public void cargarCombo(){  
         cbMetodos.addItem("Cargar Materia");

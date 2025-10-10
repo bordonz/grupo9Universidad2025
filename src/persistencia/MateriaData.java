@@ -1,4 +1,4 @@
-package persistencia;
+ package persistencia;
 
 import entidades.Materia;
 import java.sql.Connection;

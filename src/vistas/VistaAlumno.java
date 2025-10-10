@@ -40,7 +40,6 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bgBotones = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jlDni = new javax.swing.JLabel();
         jlApellido = new javax.swing.JLabel();
@@ -126,7 +125,6 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
             }
         });
 
-        bgBotones.add(jrbActivo);
         jrbActivo.setText("Activo");
         jrbActivo.setEnabled(false);
         jrbActivo.addActionListener(new java.awt.event.ActionListener() {
@@ -135,9 +133,13 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
             }
         });
 
-        bgBotones.add(jrbInactivo);
         jrbInactivo.setText("Inactivo");
         jrbInactivo.setEnabled(false);
+        jrbInactivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbInactivoActionPerformed(evt);
+            }
+        });
 
         cbMetodos.setBackground(new java.awt.Color(255, 255, 255));
         cbMetodos.addActionListener(new java.awt.event.ActionListener() {
@@ -370,6 +372,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfApellidoActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+        jtfIdAlumno.setText("");
         jtfDni.setText("");
         jtfApellido.setText("");
         jtfNombre.setText("");
@@ -380,7 +383,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jrbActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbActivoActionPerformed
-        // TODO add your handling code here:
+        jrbInactivo.setSelected(false);
     }//GEN-LAST:event_jrbActivoActionPerformed
 
     private void cbMetodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMetodosActionPerformed
@@ -389,6 +392,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         
         switch(opciones){
             case "Cargar Alumno":
+                jtfIdAlumno.setEnabled(false);
                 jtfDni.setEnabled(true);
                 jtfApellido.setEnabled(true);
                 jtfNombre.setEnabled(true);
@@ -404,6 +408,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                 
                 break;
             case "Actualizar":
+                jtfIdAlumno.setEnabled(true );
                 jtfDni.setEnabled(true);
                 jtfApellido.setEnabled(true);
                 jtfNombre.setEnabled(true);
@@ -547,6 +552,10 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
     }
     }//GEN-LAST:event_jbEliminarActionPerformed
 
+    private void jrbInactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInactivoActionPerformed
+        jrbActivo.setSelected(false);
+    }//GEN-LAST:event_jrbInactivoActionPerformed
+
     public void cargarCombo(){  
         cbMetodos.addItem("Cargar Alumno");
         cbMetodos.addItem("Actualizar");
@@ -567,7 +576,6 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup bgBotones;
     private javax.swing.JComboBox<String> cbMetodos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
