@@ -290,9 +290,6 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="jrbActivo">
       <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="default"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Activo"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
@@ -302,9 +299,6 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="jrbInactivo">
       <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="default"/>
-        </Property>
         <Property name="text" type="java.lang.String" value="Inactivo"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>

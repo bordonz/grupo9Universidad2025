@@ -125,4 +125,20 @@ public class AlumnoData {
            System.out.println("No se pudo borrar al alumno");
        }
     }
+    
+    public void bajaAltaLogica(int id, boolean boleano) {
+        String query = "UPDATE alumno SET estado = ? where idAlumno = ?";
+        try {
+            //El prepare es quien enviara con la conec la query
+            PreparedStatement ps = conec.prepareStatement(query);
+            //Remplazo los comodines y ejecuto y actualizo
+            ps.setBoolean(1, boleano);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+            ps.close();
+            System.out.println("Actualizado");
+        } catch (SQLException e) {
+            System.out.println("No se pudo actualizar");
+        }
+    }
 }

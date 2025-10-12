@@ -380,6 +380,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         //solo funciona sin el boton de grupo
         jrbActivo.setSelected(false);
         jrbInactivo.setSelected(false);
+        modeloTabla.setRowCount(0);
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jrbActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbActivoActionPerformed
