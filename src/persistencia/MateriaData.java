@@ -83,7 +83,7 @@ public class MateriaData {
     }
 
     public Materia buscarMateria(int id) {
-        String sql = "SELECT nombre, año FROM materia WHERE idMateria = ? AND estado = 1";
+        String sql = "SELECT * FROM materia WHERE idMateria = ?";
         Materia materia = null;
 
         try {
@@ -92,10 +92,10 @@ public class MateriaData {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 materia = new Materia();
-                materia.setIdMateria(id);
+                materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAnio(rs.getInt("año"));
-                materia.setEstado(true);
+                materia.setEstado(rs.getBoolean("estado"));
             } else {
                 JOptionPane.showMessageDialog(null, "No existe esa materia");
             }
@@ -136,4 +136,19 @@ public class MateriaData {
 
     }
 
+    public void bajaAltaLogica(int id, boolean boleano) {
+        String query = "UPDATE materia SET estado = ? where idMateria = ?";
+        try {
+            //El prepare es quien enviara con la conec la query
+            PreparedStatement ps = conec.prepareStatement(query);
+            //Remplazo los comodines y ejecuto y actualizo
+            ps.setBoolean(1, boleano);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+            ps.close();
+            System.out.println("Actualizado");
+        } catch (SQLException e) {
+            System.out.println("No se pudo actualizar");
+        }
+    }
 }

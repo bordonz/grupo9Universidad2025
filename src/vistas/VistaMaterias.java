@@ -57,12 +57,12 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
         jtfAnio = new javax.swing.JTextField();
         cbMetodos = new javax.swing.JComboBox<>();
         jrbActivo = new javax.swing.JRadioButton();
-        jrbInactivo = new javax.swing.JRadioButton();
         jbActualizar = new javax.swing.JButton();
         jbBuscar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jbAlta_baja = new javax.swing.JButton();
         jbListar = new javax.swing.JButton();
+        jrbInactivo = new javax.swing.JRadioButton();
 
         jlSeleccione.setText("Seleccione");
 
@@ -146,9 +146,6 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
             }
         });
 
-        jrbInactivo.setText("Inactivo");
-        jrbInactivo.setEnabled(false);
-
         jbActualizar.setBackground(new java.awt.Color(0, 102, 0));
         jbActualizar.setForeground(new java.awt.Color(255, 255, 255));
         jbActualizar.setText("Actualizar");
@@ -161,6 +158,11 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
         jbBuscar.setBackground(new java.awt.Color(0, 102, 0));
         jbBuscar.setForeground(new java.awt.Color(255, 255, 255));
         jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         jbEliminar.setBackground(new java.awt.Color(0, 102, 0));
         jbEliminar.setForeground(new java.awt.Color(255, 255, 255));
@@ -174,13 +176,25 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
         jbAlta_baja.setBackground(new java.awt.Color(0, 102, 0));
         jbAlta_baja.setForeground(new java.awt.Color(255, 255, 255));
         jbAlta_baja.setText("Alta/Baja");
+        jbAlta_baja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAlta_bajaActionPerformed(evt);
+            }
+        });
 
         jbListar.setBackground(new java.awt.Color(0, 102, 0));
         jbListar.setForeground(new java.awt.Color(255, 255, 255));
-        jbListar.setText("Ver");
+        jbListar.setText("Listar");
         jbListar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbListarActionPerformed(evt);
+            }
+        });
+
+        jrbInactivo.setText("Inactivo");
+        jrbInactivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbInactivoActionPerformed(evt);
             }
         });
 
@@ -226,11 +240,11 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(40, 40, 40)
                                         .addComponent(jrbActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(36, 36, 36)
-                                        .addComponent(jrbInactivo, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jrbInactivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jtfNombre))))
+                                        .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -433,7 +447,7 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtfAnioActionPerformed
 
     private void jrbActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbActivoActionPerformed
-        // TODO add your handling code here:
+        jrbInactivo.setSelected(false);
     }//GEN-LAST:event_jrbActivoActionPerformed
 
     private void jbListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListarActionPerformed
@@ -490,6 +504,46 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(this, "El ID debe ser un número válido.");
     }
     }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jbAlta_bajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlta_bajaActionPerformed
+        //Validacion de campos vacios
+        if(jtfIdMateria.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Los campos no pueden estar vacios");
+            return;
+        }
+        if (!jrbInactivo.isSelected()||jrbActivo.isSelected()) {
+            JOptionPane.showMessageDialog(this, "No tiene estado alguno");
+            return;
+        }
+        try {
+            int id = Integer.parseInt(jtfIdMateria.getText());
+            boolean estado = jrbActivo.isSelected();
+        
+            materiaD.bajaAltaLogica(id, estado);
+            JOptionPane.showMessageDialog(this, "Estado actualizado");
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Error de formato");
+        }
+    }//GEN-LAST:event_jbAlta_bajaActionPerformed
+
+    private void jrbInactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInactivoActionPerformed
+        jrbActivo.setSelected(false);
+    }//GEN-LAST:event_jrbInactivoActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        int idMateria = Integer.parseInt(jtfIdMateria.getText());
+        Materia materiaABuscar = materiaD.buscarMateria(idMateria);
+        if(materiaABuscar != null){
+            modeloMaterias.addRow(new Object[]{
+                materiaABuscar.getIdMateria(),
+                materiaABuscar.getNombre(),
+                materiaABuscar.getAnio(),
+                materiaABuscar.isEstado()
+            });
+        }else{
+            JOptionPane.showMessageDialog(this, "La materia no existe, verifique el id");
+        }
+    }//GEN-LAST:event_jbBuscarActionPerformed
 
     public void cargarCombo(){  
         cbMetodos.addItem("Cargar Materia");

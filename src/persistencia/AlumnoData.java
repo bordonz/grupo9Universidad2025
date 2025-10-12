@@ -92,18 +92,18 @@ public class AlumnoData {
         return alumnos;
     }
     
-    public void actualizarAlumno(Alumno a){
-        String query = "UPDATE alumno SET {dni = ?, apellido = ?, nombre = ?, fecha = ?, estado = ? where idAlumno = ?)";
+    public void actualizarAlumno(Alumno a, int n){
+        String query = "UPDATE alumno SET dni = ?, apellido = ?, nombre = ?, fecha = ?, estado = ? where idAlumno = ?";
         try {
             //El prepare es quien enviara con la conec la query
             PreparedStatement ps = conec.prepareStatement(query);
             //Remplaso los comodines y ejecuto y actualizo
             ps.setInt(1, a.getDni());
             ps.setString(2, a.getApellido());
-            ps.setString(1, a.getNombre());
+            ps.setString(3, a.getNombre());
             ps.setDate(4, Date.valueOf(a.getFechaNacimiento()));
             ps.setBoolean(5, a.isEstado());
-            ps.setInt(6, a.getIdAlumno());
+            ps.setInt(6, n);
             ps.executeUpdate();
             ps.close();
             System.out.println("Actualizado");

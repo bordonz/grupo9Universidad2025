@@ -199,6 +199,11 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         jbBuscar.setBackground(new java.awt.Color(0, 102, 0));
         jbBuscar.setForeground(new java.awt.Color(255, 255, 255));
         jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         jbListar.setBackground(new java.awt.Color(0, 102, 0));
         jbListar.setForeground(new java.awt.Color(255, 255, 255));
@@ -409,7 +414,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                 
                 break;
             case "Actualizar":
-                jtfIdAlumno.setEnabled(true );
+                jtfIdAlumno.setEnabled(true);
                 jtfDni.setEnabled(true);
                 jtfApellido.setEnabled(true);
                 jtfNombre.setEnabled(true);
@@ -505,22 +510,19 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                 aux.getFechaNacimiento(),
                 aux.isEstado()
             });
-        }
-        
-       
-
+        }      
     }//GEN-LAST:event_jbListarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
-          try {
+        try {
             if (jtfDni.getText().trim().isEmpty() || jtfApellido.getText().trim().isEmpty()
                     || jtfNombre.getText().trim().isEmpty() || jdcFecha.getDate() == null) {
                 JOptionPane.showMessageDialog(this, "No se puedo realizar la actulizacion. Los campos no pueden estar vacios");
                 return;
             } else {
                 JOptionPane.showMessageDialog(this, "Alumno actualizado correctamente");
-            }
-
+            } 
+            
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Error.");
         } catch (NullPointerException e) {
@@ -531,7 +533,24 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbActualizarActionPerformed
 
     private void jbAlta_bajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlta_bajaActionPerformed
-        // TODO add your handling code here:
+        //Validacion de campos vacios
+        if(jtfIdAlumno.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Los campos no pueden estar vacios");
+            return;
+        }
+        if (!jrbInactivo.isSelected()||jrbActivo.isSelected()) {
+            JOptionPane.showMessageDialog(this, "No tiene estado alguno");
+            return;
+        }
+        try {
+            int id = Integer.parseInt(jtfIdAlumno.getText());
+            boolean estado = jrbActivo.isSelected();
+        
+            alumnoD.bajaAltaLogica(id, estado);
+            JOptionPane.showConfirmDialog(this, "Estado actualizado");
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Error de formato");
+        }
     }//GEN-LAST:event_jbAlta_bajaActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
@@ -556,6 +575,23 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
     private void jrbInactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInactivoActionPerformed
         jrbActivo.setSelected(false);
     }//GEN-LAST:event_jrbInactivoActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        int idAlumno = Integer.parseInt(jtfIdAlumno.getText());
+        Alumno alumnoABuscar = alumnoD.buscarAlumno(idAlumno);
+        if(alumnoABuscar != null){
+            modeloTabla.addRow(new Object[]{
+                alumnoABuscar.getIdAlumno(),
+                alumnoABuscar.getDni(),
+                alumnoABuscar.getApellido(),
+                alumnoABuscar.getNombre(),
+                alumnoABuscar.getFechaNacimiento(),
+                alumnoABuscar.isEstado()
+            });
+        }else{
+            JOptionPane.showMessageDialog(this, "El alumno no existe, verifique el id");
+        }
+    }//GEN-LAST:event_jbBuscarActionPerformed
 
     public void cargarCombo(){  
         cbMetodos.addItem("Cargar Alumno");
