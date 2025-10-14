@@ -67,15 +67,15 @@ public class AlumnoData {
         }
         return a;
     }
-    
-    public ArrayList<Alumno> listarAlumnos(){
+
+    public ArrayList<Alumno> listarAlumnos() {
         Alumno a = null;
         ArrayList<Alumno> alumnos = new ArrayList<>();
         try {
             String query = "SELECT * FROM alumno";
             PreparedStatement ps = conec.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 a = new Alumno();
                 a.setIdAlumno(rs.getInt("idAlumno"));
                 a.setDni(rs.getInt("dni"));
@@ -86,14 +86,14 @@ public class AlumnoData {
                 alumnos.add(a);
             }
             ps.close();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.getMessage();
         }
         return alumnos;
     }
-    
-    public void actualizarAlumno(Alumno a, int n){
-        String query = "UPDATE alumno SET dni = ?, apellido = ?, nombre = ?, fecha = ?, estado = ? where idAlumno = ?";
+
+    public void actualizarAlumno(Alumno a, int n) {
+        String query = "UPDATE alumno SET dni = ?, apellido = ?, nombre = ?, fechaNacimiento = ?, estado = ? where idAlumno = ?";
         try {
             //El prepare es quien enviara con la conec la query
             PreparedStatement ps = conec.prepareStatement(query);
@@ -107,12 +107,12 @@ public class AlumnoData {
             ps.executeUpdate();
             ps.close();
             System.out.println("Actualizado");
-       }catch(SQLException e){
-           System.out.println("No se pudo actualizar");
-       }
+        } catch (SQLException e) {
+            System.out.println("No se pudo actualizar");
+        }
     }
-        
-    public void bajaFisicaAlumno(int id){
+
+    public void bajaFisicaAlumno(int id) {
         String query = "DELETE FROM alumno WHERE idAlumno = ?";
         try {
             //El prepare es quien enviara con la conec la query
@@ -121,11 +121,11 @@ public class AlumnoData {
             ps.setInt(1, id);
             ps.executeUpdate();
             System.out.println("Alumno borrado");
-       }catch(SQLException e){
-           System.out.println("No se pudo borrar al alumno");
-       }
+        } catch (SQLException e) {
+            System.out.println("No se pudo borrar al alumno");
+        }
     }
-    
+
     public void bajaAltaLogica(int id, boolean boleano) {
         String query = "UPDATE alumno SET estado = ? where idAlumno = ?";
         try {

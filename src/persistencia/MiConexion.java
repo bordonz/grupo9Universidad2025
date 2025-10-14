@@ -30,5 +30,3 @@ public class MiConexion {
         return conexion;
     }
 }
-
-

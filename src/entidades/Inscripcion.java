@@ -10,62 +10,64 @@ package entidades;
  * @author julianesquiaga
  */
 public class Inscripcion {
+
     private int idInscripto;
-    private int nota;
-    private int idAlumno;
-    private int idMateria;
+    private double nota;
+    private Alumno alumno;
+    private Materia materia;
 
-
-    public Inscripcion() {    
+    public Inscripcion() {
     }
 
-    public Inscripcion(int nota, int idAlumno, int idMateria) {
-        int idInscripto = -1;
+    public Inscripcion(int idInscripto, Alumno alumno, Materia materia, double nota) {
+        this.idInscripto = idInscripto;
+        this.alumno = alumno;
+        this.materia = materia;
         this.nota = nota;
-        this.idAlumno = idAlumno;
-        this.idMateria = idMateria;
+    }
+
+    public Inscripcion(Alumno alumno, Materia materia, double nota) {
+        this.alumno = alumno;
+        this.materia = materia;
+        this.nota = nota;
     }
 
     public int getIdInscripto() {
         return idInscripto;
     }
 
-    public int getNota() {
-        return nota;
-    }
-
-    public int getIdAlumno() {
-        return idAlumno;
-    }
-
-    public int getIdMateria() {
-        return idMateria;
-    }
-
     public void setIdInscripto(int idInscripto) {
         this.idInscripto = idInscripto;
     }
 
-    public void setNota(int nota) {
+    public double getNota() {
+        return nota;
+    }
+
+    public void setNota(double nota) {
         this.nota = nota;
     }
 
-    public void setIdAlumno(int idAlumno) {
-        this.idAlumno = idAlumno;
+    public Alumno getAlumno() {
+        return alumno;
     }
 
-    public void setIdMateria(int idMateria) {
-        this.idMateria = idMateria;
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
+    }
+
+    public Materia getMateria() {
+        return materia;
+    }
+
+    public void setMateria(Materia materia) {
+        this.materia = materia;
     }
 
     @Override
     public String toString() {
-        return "Inscripcion{" + "idInscripto=" + idInscripto + ", nota=" + nota + ", idAlumno=" + idAlumno + ", idMateria=" + idMateria + '}';
+        String insc = idInscripto + " " + alumno.getApellido() + " " + alumno.getNombre() + " " + materia.getNombre();
+        return insc;
     }
 
-    
-
-
 };
-
-
