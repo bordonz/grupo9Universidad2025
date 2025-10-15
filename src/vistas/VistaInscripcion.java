@@ -20,6 +20,7 @@ public class VistaInscripcion extends javax.swing.JFrame {
     private DefaultTableModel modeloTabla= new DefaultTableModel();
     public VistaInscripcion() {
         initComponents();
+        tablaCabecera();
     }
 
     /**
