@@ -25,7 +25,7 @@ public class InscripcionData {
     }
 
     public void guardarInscripcion(Inscripcion insc) {
-        String sql = "INSERT INTO inscripcion (idAlumno, idMateria, nota) VALUE (?, ?, ?)";
+        String sql = "INSERT INTO inscripcion (idAlumno, idMateria, nota) VALUES (?, ?, ?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -231,6 +231,7 @@ public class InscripcionData {
             while (rs.next()) {
                 Alumno alumno = new Alumno();
                 alumno.setIdAlumno(rs.getInt("idAlumno"));
+                alumno.setDni(rs.getInt("dni"));
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
