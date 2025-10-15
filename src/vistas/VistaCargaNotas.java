@@ -6,9 +6,11 @@
 package vistas;
 
 import entidades.Alumno;
+import entidades.Materia;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import persistencia.AlumnoData;
+import persistencia.InscripcionData;
 import persistencia.MiConexion;
 
 /**
@@ -23,6 +25,7 @@ public class VistaCargaNotas extends javax.swing.JInternalFrame {
     private ArrayList <Alumno> listaAlumnos;
     MiConexion conex = new MiConexion("jdbc:mariadb://localhost:3306/ulp2025gp9", "root", "");
     AlumnoData alumnoD = new AlumnoData(conex);
+    InscripcionData insD = new InscripcionData(conex);
     private DefaultTableModel tablaAlumnos = new DefaultTableModel()
 ;    public VistaCargaNotas() {
         initComponents();
@@ -54,6 +57,12 @@ public class VistaCargaNotas extends javax.swing.JInternalFrame {
 
         jlSeleccionar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jlSeleccionar.setText("Seleccione un alumno:");
+
+        jcbAlumnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbAlumnosActionPerformed(evt);
+            }
+        });
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,6 +130,10 @@ public class VistaCargaNotas extends javax.swing.JInternalFrame {
       
     }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jcbAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnosActionPerformed
+        cargarFilas();
+    }//GEN-LAST:event_jcbAlumnosActionPerformed
+
     
     private void cargarCombo(){
         for(Alumno aux : listaAlumnos){
@@ -133,6 +146,22 @@ public class VistaCargaNotas extends javax.swing.JInternalFrame {
         tablaAlumnos.addColumn("Nombre");
         tablaAlumnos.addColumn("Nota");
         jTable.setModel(tablaAlumnos);
+    }
+    
+    private void cargarFilas(){
+        Alumno alum = (Alumno)jcbAlumnos.getSelectedItem();
+        ArrayList<Materia> listaMaterias = (ArrayList) insD.obtenerMateriasCursadasPorAlumno(alum.getIdAlumno());
+        for(Materia aux : listaMaterias){
+            tablaAlumnos.addRow(new Object[] {
+                aux.getIdMateria(),
+                aux.getNombre(),
+                aux.getAnio()
+            });
+        }
+    }
+    
+    private void ModificarNota(){
+        
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
