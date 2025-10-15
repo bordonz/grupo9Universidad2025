@@ -47,6 +47,14 @@
                 <Property name="text" type="java.lang.String" value="Gestion Inscripcion"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmiCargarNotas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cargar notas"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiCargarNotasActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
       </SubComponents>
