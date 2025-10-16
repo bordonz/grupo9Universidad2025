@@ -68,7 +68,6 @@ public class InscripcionData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción");
         }
-
     }
 
     public void borrarInscripcionMateriaAlumno(int idAlumno, int idMateria) {
@@ -181,7 +180,7 @@ public class InscripcionData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripción");
         }
-
+ 
         return materias;
 
     }

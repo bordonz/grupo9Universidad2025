@@ -6,8 +6,10 @@
 package vistas;
 
 import entidades.Alumno;
+import entidades.Inscripcion;
 import entidades.Materia;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import persistencia.AlumnoData;
 import persistencia.InscripcionData;
@@ -22,17 +24,16 @@ public class VistaCargaNotas extends javax.swing.JInternalFrame {
     /**
      * Creates new form VistaCargaNotas
      */
-    private ArrayList <Alumno> listaAlumnos;
-    MiConexion conex = new MiConexion("jdbc:mariadb://localhost:3306/ulp2025gp9", "root", "");
-    AlumnoData alumnoD = new AlumnoData(conex);
-    InscripcionData insD = new InscripcionData(conex);
-    private DefaultTableModel tablaAlumnos = new DefaultTableModel()
-;    public VistaCargaNotas() {
+    private ArrayList <Alumno> listaAlumnos = new ArrayList();
+    private MiConexion conex = new MiConexion("jdbc:mariadb://localhost:3306/ulp2025gp9", "root", "");
+    private AlumnoData alumnoD = new AlumnoData(conex);
+    private InscripcionData insD = new InscripcionData(conex);
+    private DefaultTableModel tablaAlumnos = new DefaultTableModel();
+    public VistaCargaNotas() {
         initComponents();
         listaAlumnos = alumnoD.listarAlumnos();
         cargarCombo();
         cargarTabla();
-        
     }
 
     /**
@@ -78,6 +79,11 @@ public class VistaCargaNotas extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTable);
 
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -91,7 +97,7 @@ public class VistaCargaNotas extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(63, Short.MAX_VALUE)
+                .addContainerGap(64, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jbGuardar)
@@ -127,13 +133,17 @@ public class VistaCargaNotas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-      
+        this.dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jcbAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnosActionPerformed
         cargarFilas();
     }//GEN-LAST:event_jcbAlumnosActionPerformed
 
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        modificarNota();
+    }//GEN-LAST:event_jbGuardarActionPerformed
+    
     
     private void cargarCombo(){
         for(Alumno aux : listaAlumnos){
@@ -150,18 +160,26 @@ public class VistaCargaNotas extends javax.swing.JInternalFrame {
     
     private void cargarFilas(){
         Alumno alum = (Alumno)jcbAlumnos.getSelectedItem();
-        ArrayList<Materia> listaMaterias = (ArrayList) insD.obtenerMateriasCursadasPorAlumno(alum.getIdAlumno());
-        for(Materia aux : listaMaterias){
+        ArrayList<Inscripcion> listaInscripcion = (ArrayList) insD.obtenerInscripcionPorAlumno(alum.getIdAlumno());
+        for(Inscripcion aux : listaInscripcion){
             tablaAlumnos.addRow(new Object[] {
-                aux.getIdMateria(),
-                aux.getNombre(),
-                aux.getAnio()
+                aux.getMateria().getIdMateria(),
+                aux.getMateria().getNombre(),
+                aux.getNota()
             });
         }
     }
     
-    private void ModificarNota(){
-        
+    private void modificarNota(){
+        try{
+            int fila = jTable.getSelectedRow();
+            int idMateria = Integer.parseInt(jTable.getValueAt(fila, 0).toString());
+            Double nota = Double.parseDouble(jTable.getValueAt(fila, 2).toString());
+            Alumno alumno = (Alumno)jcbAlumnos.getSelectedItem();
+            insD.actualizarNota(alumno.getIdAlumno(), idMateria, nota);
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Debe escribir notas numericas");
+        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
