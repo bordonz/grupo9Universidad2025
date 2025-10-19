@@ -35,6 +35,7 @@ public class Menu extends javax.swing.JFrame {
         jmiMaterias = new javax.swing.JMenuItem();
         jMenuInscripcion = new javax.swing.JMenu();
         jmiItemInscripcion = new javax.swing.JMenuItem();
+        jmiCargarNotas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,6 +84,14 @@ public class Menu extends javax.swing.JFrame {
         jmiItemInscripcion.setText("Gestion Inscripcion");
         jMenuInscripcion.add(jmiItemInscripcion);
 
+        jmiCargarNotas.setText("Cargar notas");
+        jmiCargarNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCargarNotasActionPerformed(evt);
+            }
+        });
+        jMenuInscripcion.add(jmiCargarNotas);
+
         jMenuBar1.add(jMenuInscripcion);
 
         setJMenuBar(jMenuBar1);
@@ -124,6 +133,14 @@ public class Menu extends javax.swing.JFrame {
         cargarInscripcion.setVisible(true);
         escritorio.add(cargarInscripcion);
     }//GEN-LAST:event_jMenuInscripcionActionPerformed
+
+    private void jmiCargarNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCargarNotasActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaCargaNotas cargaNotas = new VistaCargaNotas();
+        cargaNotas.setVisible(true);
+        escritorio.add(cargaNotas);
+    }//GEN-LAST:event_jmiCargarNotasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,6 +184,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuInscripcion;
     private javax.swing.JMenu jMenuMaterias;
     private javax.swing.JMenuItem jmiAlumnos;
+    private javax.swing.JMenuItem jmiCargarNotas;
     private javax.swing.JMenuItem jmiItemInscripcion;
     private javax.swing.JMenuItem jmiMaterias;
     // End of variables declaration//GEN-END:variables

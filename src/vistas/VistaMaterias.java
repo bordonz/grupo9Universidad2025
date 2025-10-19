@@ -296,6 +296,7 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+        jtfIdMateria.setText("");
         jtfNombre.setText("");
         jtfAnio.setText("");
         jtfAnio.setText("");
@@ -365,8 +366,8 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
             jtfIdMateria.setEnabled(true);
             jtfNombre.setEnabled(true);
             jtfAnio.setEnabled(true);
-            jrbActivo.setEnabled(true);
-            jrbInactivo.setEnabled(true);
+            jrbActivo.setEnabled(false);
+            jrbInactivo.setEnabled(false);
             jbActualizar.setEnabled(true);
             jbAlta_baja.setEnabled(false);
             jbBuscar.setEnabled(false);
@@ -470,14 +471,18 @@ public class VistaMaterias extends javax.swing.JInternalFrame {
                     || jtfAnio.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No se puedo realizar la actulizacion. Los campos no pueden estar vacios");
                 return;
-            } else {
-                JOptionPane.showMessageDialog(this, "Materia actualizado correctamente");
             }
-            if (!jrbInactivo.isSelected()||jrbActivo.isSelected()) {
-               JOptionPane.showMessageDialog(this, "No tiene estado alguno");
-               return;
-           }
 
+            int idMateria = Integer.parseInt(jtfIdMateria.getText());
+            String nombre = jtfNombre.getText();
+            int anio = Integer.parseInt(jtfAnio.getText());
+            boolean estado = jrbActivo.isSelected();
+            Materia mat = new Materia();
+            mat.setIdMateria(idMateria);
+            mat.setNombre(nombre);
+            mat.setAnio(anio);
+            materiaD.modificarMateria(mat);
+            
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Error.");
         } catch (NullPointerException e) {

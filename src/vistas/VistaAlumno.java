@@ -419,8 +419,8 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                 jtfApellido.setEnabled(true);
                 jtfNombre.setEnabled(true);
                 jdcFecha.setEnabled(true);
-                jrbActivo.setEnabled(true);
-                jrbInactivo.setEnabled(true); 
+                jrbActivo.setEnabled(false);
+                jrbInactivo.setEnabled(false); 
                 jbGuardar.setEnabled(false);
                 jbAlta_baja.setEnabled(false);
                 jbBuscar.setEnabled(false);
@@ -519,16 +519,25 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                     || jtfNombre.getText().trim().isEmpty() || jdcFecha.getDate() == null) {
                 JOptionPane.showMessageDialog(this, "No se puedo realizar la actulizacion. Los campos no pueden estar vacios");
                 return;
-            } else {
-                JOptionPane.showMessageDialog(this, "Alumno actualizado correctamente");
-            } 
-            
+            }
+            int idAlumno = Integer.parseInt(jtfIdAlumno.getText());
+            String nombre = jtfNombre.getText();
+            String apellido = jtfApellido.getText();
+            LocalDate fecha = jdcFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            int dni = Integer.parseInt(jtfDni.getText());
+            Alumno alum = new Alumno();
+            alum.setIdAlumno(idAlumno);
+            alum.setDni(dni);
+            alum.setApellido(apellido);
+            alum.setNombre(nombre);
+            alum.setFechaNacimiento(fecha);
+            alumnoD.actualizarAlumno(alum);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Error.");
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "Debe completar todos los campos");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error al actualizar: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla materia");
         }
     }//GEN-LAST:event_jbActualizarActionPerformed
 
