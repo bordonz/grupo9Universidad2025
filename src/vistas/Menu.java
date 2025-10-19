@@ -81,7 +81,12 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jmiItemInscripcion.setText("Gestion Inscripcion");
+        jmiItemInscripcion.setText("ListarInscripciones");
+        jmiItemInscripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiItemInscripcionActionPerformed(evt);
+            }
+        });
         jMenuInscripcion.add(jmiItemInscripcion);
 
         jmiCargarNotas.setText("Cargar notas");
@@ -141,6 +146,14 @@ public class Menu extends javax.swing.JFrame {
         cargaNotas.setVisible(true);
         escritorio.add(cargaNotas);
     }//GEN-LAST:event_jmiCargarNotasActionPerformed
+
+    private void jmiItemInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiItemInscripcionActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaListarInscripciones listarIns = new VistaListarInscripciones();
+        listarIns.setVisible(true);
+        escritorio.add(listarIns);
+    }//GEN-LAST:event_jmiItemInscripcionActionPerformed
 
     /**
      * @param args the command line arguments
