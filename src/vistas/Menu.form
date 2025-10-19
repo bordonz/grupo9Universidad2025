@@ -42,14 +42,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuInscripcionActionPerformed"/>
           </Events>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jmiItemInscripcion">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="ListarInscripciones"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiItemInscripcionActionPerformed"/>
-              </Events>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiCargarNotas">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cargar notas"/>

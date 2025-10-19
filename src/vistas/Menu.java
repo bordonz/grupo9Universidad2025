@@ -34,7 +34,6 @@ public class Menu extends javax.swing.JFrame {
         jMenuMaterias = new javax.swing.JMenu();
         jmiMaterias = new javax.swing.JMenuItem();
         jMenuInscripcion = new javax.swing.JMenu();
-        jmiItemInscripcion = new javax.swing.JMenuItem();
         jmiCargarNotas = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -82,9 +81,6 @@ public class Menu extends javax.swing.JFrame {
                 jMenuInscripcionActionPerformed(evt);
             }
         });
-
-        jmiItemInscripcion.setText("Gestion Inscripcion");
-        jMenuInscripcion.add(jmiItemInscripcion);
 
         jmiCargarNotas.setText("Cargar notas");
         jmiCargarNotas.addActionListener(new java.awt.event.ActionListener() {
@@ -218,7 +214,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuMaterias;
     private javax.swing.JMenuItem jmiAlumnos;
     private javax.swing.JMenuItem jmiCargarNotas;
-    private javax.swing.JMenuItem jmiItemInscripcion;
     private javax.swing.JMenuItem jmiMaterias;
     // End of variables declaration//GEN-END:variables
 }
