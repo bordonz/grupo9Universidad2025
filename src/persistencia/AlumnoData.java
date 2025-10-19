@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.naming.spi.DirStateFactory;
+import javax.swing.JOptionPane;
 
 public class AlumnoData {
 
@@ -92,8 +93,8 @@ public class AlumnoData {
         return alumnos;
     }
 
-    public void actualizarAlumno(Alumno a, int n) {
-        String query = "UPDATE alumno SET dni = ?, apellido = ?, nombre = ?, fechaNacimiento = ?, estado = ? where idAlumno = ?";
+    public void actualizarAlumno(Alumno a) {
+        String query = "UPDATE alumno SET dni = ?, apellido = ?, nombre = ?, fechaNacimiento = ? where idAlumno = ?";
         try {
             //El prepare es quien enviara con la conec la query
             PreparedStatement ps = conec.prepareStatement(query);
@@ -102,11 +103,11 @@ public class AlumnoData {
             ps.setString(2, a.getApellido());
             ps.setString(3, a.getNombre());
             ps.setDate(4, Date.valueOf(a.getFechaNacimiento()));
-            ps.setBoolean(5, a.isEstado());
-            ps.setInt(6, n);
-            ps.executeUpdate();
-            ps.close();
-            System.out.println("Actualizado");
+            ps.setInt(5, a.getIdAlumno());
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Alumno modificado");
+            }
         } catch (SQLException e) {
             System.out.println("No se pudo actualizar");
         }
