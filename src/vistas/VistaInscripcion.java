@@ -5,8 +5,14 @@
  */
 package vistas;
 
+import entidades.Alumno;
+import entidades.Inscripcion;
+import entidades.Materia;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import persistencia.AlumnoData;
+import persistencia.InscripcionData;
+import persistencia.MateriaData;
 import persistencia.MiConexion;
 
 /**
@@ -15,12 +21,22 @@ import persistencia.MiConexion;
  */
 public class VistaInscripcion extends javax.swing.JFrame {
 
+    private ArrayList<Alumno> listaAlumno;
+    private ArrayList<Materia> listaMateria;
+    private InscripcionData InsData;
+    private MateriaData materiaData;
+
     MiConexion conex = new MiConexion("jdbc:mariadb://localhost:3306/ulp2025gp9", "root", "");
     AlumnoData alumnoD = new AlumnoData(conex);
-    private DefaultTableModel modeloTabla= new DefaultTableModel();
+    private DefaultTableModel modeloTabla = new DefaultTableModel();
+
     public VistaInscripcion() {
         initComponents();
         tablaCabecera();
+        cargarAlumnos();
+        listaAlumno = alumnoD.listarAlumnos();
+        InsData = new InscripcionData();
+        materiaData = new MateriaData();
     }
 
     /**
@@ -61,6 +77,11 @@ public class VistaInscripcion extends javax.swing.JFrame {
         });
 
         jrbNoInscriptas.setText("No Inscriptas");
+        jrbNoInscriptas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbNoInscriptasActionPerformed(evt);
+            }
+        });
 
         jtInscripcion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,6 +104,7 @@ public class VistaInscripcion extends javax.swing.JFrame {
 
         jbInscribir.setBackground(new java.awt.Color(0, 102, 0));
         jbInscribir.setText("Inscribir");
+        jbInscribir.setEnabled(false);
         jbInscribir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbInscribirActionPerformed(evt);
@@ -91,6 +113,7 @@ public class VistaInscripcion extends javax.swing.JFrame {
 
         jbAnularInscripcion.setBackground(new java.awt.Color(0, 102, 0));
         jbAnularInscripcion.setText("Anular Inscripcion");
+        jbAnularInscripcion.setEnabled(false);
         jbAnularInscripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAnularInscripcionActionPerformed(evt);
@@ -99,6 +122,7 @@ public class VistaInscripcion extends javax.swing.JFrame {
 
         jbSalir.setBackground(new java.awt.Color(0, 102, 0));
         jbSalir.setText("Salir");
+        jbSalir.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -165,20 +189,50 @@ public class VistaInscripcion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrbInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInscriptasActionPerformed
-        // TODO add your handling code here:
+        jrbNoInscriptas.setSelected(false);
+        cargarDatosInscriptas();
+        jbAnularInscripcion.enable(true);
+        jbInscribir.enable(false);
     }//GEN-LAST:event_jrbInscriptasActionPerformed
 
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
-        // TODO add your handling code here:
+        int filaSeleccionada = jtInscripcion.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            Alumno a = (Alumno) jcbSeleccioneAlumno.getSelectedItem();
+
+            int idMateria = (Integer) modeloTabla.getValueAt(filaSeleccionada, 0);
+            String nombreMateria = (String) modeloTabla.getValueAt(filaSeleccionada, 1);
+            int anio = (Integer) modeloTabla.getValueAt(filaSeleccionada, 2);
+
+            Inscripcion i = new Inscripcion();
+            InsData.guardarInscripcion(i);
+            borrarFilasDeTabla();
+        }
+
     }//GEN-LAST:event_jbInscribirActionPerformed
 
     private void jbAnularInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnularInscripcionActionPerformed
-        // TODO add your handling code here:
+        int filaSeleccioanda = jtInscripcion.getSelectedRow();
+        if (filaSeleccioanda!=-1) {
+            Alumno a = (Alumno) jcbSeleccioneAlumno.getSelectedItem();
+            
+            int idMateria = (Integer) modeloTabla.getValueAt(filaSeleccioanda, 0);
+            
+            InsData.borrarInscripcionMateriaAlumno(a.getIdAlumno(), idMateria);
+            borrarFilasDeTabla();
+        }
     }//GEN-LAST:event_jbAnularInscripcionActionPerformed
 
     private void jcbSeleccioneAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSeleccioneAlumnoActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jcbSeleccioneAlumnoActionPerformed
+
+    private void jrbNoInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbNoInscriptasActionPerformed
+        jrbInscriptas.setSelected(false);
+        cargarDatosInscriptas();
+        jbAnularInscripcion.enable(false);
+        jbInscribir.enable(true);
+    }//GEN-LAST:event_jrbNoInscriptasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,21 +268,57 @@ public class VistaInscripcion extends javax.swing.JFrame {
             }
         });
     }
+
+    public void cargarDatosInscriptas() {
+        borrarFilasDeTabla();
+        Alumno selec = (Alumno) jcbSeleccioneAlumno.getSelectedItem();
+        listaMateria = InsData.obtenerMateriasCursadasPorAlumno(selec.idAlumno);
+        for (Materia m : listaMateria) {
+            modeloTabla.addRow(new Object[] (m.getIdMateria() , m.getNombre() , m.getAnio()));
+        }
+    }
     
-      private void tablaCabecera(){
+    public void cargarDatosNoInscriptas() {
+        borrarFilasDeTabla();
+        Alumno selec = (Alumno) jcbSeleccioneAlumno.getSelectedItem();
+        listaMateria = InsData.obtenerMateriasNoCursadas(selec.idAlumno);
+        for (Materia m : listaMateria) {
+            modeloTabla.addRow(new Object[] (m.getIdMateria(), m.getNombre() , m.getAnio()));
+        }
+    }
+    
+    private void cargarAlumnos() {
+        for (Alumno item : listaAlumno) {
+            jcbSeleccioneAlumno.addItem(item);
+        }
+    }
+
+    private void borrarFilasDeTabla() {
+        int indice = modeloTabla.getRowCount()-1;
+        
+        for (int i = indice; i>=0; i--) {
+            modeloTabla.removeRow(i);
+        }
+    }
+
+    private void tablaCabecera() {
+        ArrayList<Object> filaCabercera = new ArrayList<>();
         modeloTabla.addColumn("Id");
         modeloTabla.addColumn("Nombre");
         modeloTabla.addColumn("Año");
+        for (Object it : filaCabercera) {
+            modeloTabla.addColumn(it);
+        }
         jtInscripcion.setModel(modeloTabla);
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbAnularInscripcion;
     private javax.swing.JButton jbInscribir;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<AlumnoData> jcbSeleccioneAlumno;
+    private javax.swing.JComboBox<Alumno> jcbSeleccioneAlumno;
     private javax.swing.JLabel jlCompleteDatos;
     private javax.swing.JLabel jlSeleccione;
     private javax.swing.JLabel jlVerMaterias;

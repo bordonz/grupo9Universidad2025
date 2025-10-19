@@ -24,6 +24,10 @@ public class InscripcionData {
         this.ad = new AlumnoData(conexion);
     }
 
+    public InscripcionData() {
+    
+    }
+
     public void guardarInscripcion(Inscripcion insc) {
         String sql = "INSERT INTO inscripcion (idAlumno, idMateria, nota) VALUE (?, ?, ?)";
 

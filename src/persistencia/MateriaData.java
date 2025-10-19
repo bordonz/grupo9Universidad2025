@@ -24,6 +24,10 @@ public class MateriaData {
         this.conec = conexion.buscarConexion();
     }
 
+    public MateriaData() {
+        
+    }
+
     public boolean materiaNueva(Materia m) {
         String query = "INSERT INTO materia (nombre, año, estado) VALUES(?, ?, ?)";
         try {
