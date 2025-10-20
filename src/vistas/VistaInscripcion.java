@@ -9,6 +9,7 @@ import entidades.Alumno;
 import entidades.Inscripcion;
 import entidades.Materia;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import persistencia.AlumnoData;
 import persistencia.InscripcionData;
@@ -21,8 +22,8 @@ import persistencia.MiConexion;
  */
 public class VistaInscripcion extends javax.swing.JFrame {
 
-    private ArrayList<Alumno> listaAlumno;
-    private ArrayList<Materia> listaMateria;
+    private ArrayList<Alumno> listaAlumno = new ArrayList();
+    private List<Materia> listaMateria;
     private InscripcionData InsData;
     private MateriaData materiaData;
 
@@ -33,9 +34,10 @@ public class VistaInscripcion extends javax.swing.JFrame {
     public VistaInscripcion() {
         initComponents();
         tablaCabecera();
-        cargarAlumnos();
         listaAlumno = alumnoD.listarAlumnos();
-        InsData = new InscripcionData();
+        cargarAlumnos();
+
+        InsData = new InscripcionData(conex);
         materiaData = new MateriaData();
     }
 
@@ -192,8 +194,8 @@ public class VistaInscripcion extends javax.swing.JFrame {
         borrarFilasDeTabla();
         jrbNoInscriptas.setSelected(false);
         cargarDatosInscriptas();
-        jbAnularInscripcion.enable(true);
-        jbInscribir.enable(false);
+        jbAnularInscripcion.setEnabled(true);
+        jbInscribir.setEnabled(false);
     }//GEN-LAST:event_jrbInscriptasActionPerformed
 
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
@@ -225,15 +227,15 @@ public class VistaInscripcion extends javax.swing.JFrame {
     }//GEN-LAST:event_jbAnularInscripcionActionPerformed
 
     private void jcbSeleccioneAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSeleccioneAlumnoActionPerformed
-
+        
     }//GEN-LAST:event_jcbSeleccioneAlumnoActionPerformed
 
     private void jrbNoInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbNoInscriptasActionPerformed
         borrarFilasDeTabla();
         jrbInscriptas.setSelected(false);
-        cargarDatosInscriptas();
-        jbAnularInscripcion.enable(false);
-        jbInscribir.enable(true);
+        cargarDatosNoInscriptas();
+        jbAnularInscripcion.setEnabled(false);
+        jbInscribir.setEnabled(true);
     }//GEN-LAST:event_jrbNoInscriptasActionPerformed
 
     /**
@@ -274,18 +276,22 @@ public class VistaInscripcion extends javax.swing.JFrame {
     public void cargarDatosInscriptas() {
         borrarFilasDeTabla();
         Alumno selec = (Alumno) jcbSeleccioneAlumno.getSelectedItem();
-        listaMateria = InsData.obtenerMateriasCursadasPorAlumno(selec.idAlumno);
+        listaMateria = InsData.obtenerMateriasCursadasPorAlumno(selec.getIdAlumno());
         for (Materia m : listaMateria) {
-            modeloTabla.addRow(new Object[] (m.getIdMateria() , m.getNombre() , m.getAnio()));
+            modeloTabla.addRow(new Object[] {
+                m.getIdMateria() , m.getNombre() , m.getAnio()
+            });
         }
     }
     
     public void cargarDatosNoInscriptas() {
         borrarFilasDeTabla();
         Alumno selec = (Alumno) jcbSeleccioneAlumno.getSelectedItem();
-        listaMateria = InsData.obtenerMateriasNoCursadas(selec.idAlumno);
+        listaMateria = InsData.obtenerMateriasNoCursadas(selec.getIdAlumno());
         for (Materia m : listaMateria) {
-            modeloTabla.addRow(new Object[] (m.getIdMateria(), m.getNombre() , m.getAnio()));
+            modeloTabla.addRow(new Object[] {
+                m.getIdMateria(), m.getNombre() , m.getAnio()
+            });
         }
     }
     
