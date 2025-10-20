@@ -189,6 +189,7 @@ public class VistaInscripcion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrbInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInscriptasActionPerformed
+        borrarFilasDeTabla();
         jrbNoInscriptas.setSelected(false);
         cargarDatosInscriptas();
         jbAnularInscripcion.enable(true);
@@ -228,6 +229,7 @@ public class VistaInscripcion extends javax.swing.JFrame {
     }//GEN-LAST:event_jcbSeleccioneAlumnoActionPerformed
 
     private void jrbNoInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbNoInscriptasActionPerformed
+        borrarFilasDeTabla();
         jrbInscriptas.setSelected(false);
         cargarDatosInscriptas();
         jbAnularInscripcion.enable(false);
