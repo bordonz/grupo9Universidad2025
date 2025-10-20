@@ -36,6 +36,8 @@ public class Menu extends javax.swing.JFrame {
         jMenuInscripcion = new javax.swing.JMenu();
         jmiItemInscripcion = new javax.swing.JMenuItem();
         jmiCargarNotas = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,6 +96,23 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuInscripcion);
 
+        jMenu1.setText("Consultas");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
+
+        jMenuItem2.setText("Listar Inscripciones por Alumno");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu1);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -142,6 +161,18 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(cargaNotas);
     }//GEN-LAST:event_jmiCargarNotasActionPerformed
 
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+       
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+         escritorio.removeAll();
+        escritorio.repaint();
+        VistaListarInscripciones listarInsc = new VistaListarInscripciones();
+        listarInsc.setVisible(true);
+        escritorio.add(listarInsc);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -180,8 +211,10 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu JMenuAlumnos;
     private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuInscripcion;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu jMenuMaterias;
     private javax.swing.JMenuItem jmiAlumnos;
     private javax.swing.JMenuItem jmiCargarNotas;

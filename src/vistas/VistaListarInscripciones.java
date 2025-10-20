@@ -51,14 +51,11 @@ public class VistaListarInscripciones extends javax.swing.JInternalFrame {
         for (Inscripcion i : inscripciones) {
             Materia mat = i.getMateria();
             tablaListarInsc.addRow(new Object[]{
-                alumnoSeleccionado.getIdAlumno(),
                 alumnoSeleccionado.getDni(),
                 alumnoSeleccionado.getApellido(),
                 alumnoSeleccionado.getNombre(),
                 mat.getIdMateria(),
                 mat.getNombre(),
-                mat.getAnio(),
-                i.getIdInscripto(),
                 i.getNota()
                
             });
@@ -85,7 +82,6 @@ public class VistaListarInscripciones extends javax.swing.JInternalFrame {
         jLIdAlumno = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTMateriasInscriptas = new javax.swing.JTable();
-        jBBuscar = new javax.swing.JButton();
         jcbListaAlumnos = new javax.swing.JComboBox<>();
 
         setClosable(true);
@@ -114,10 +110,6 @@ public class VistaListarInscripciones extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTMateriasInscriptas);
 
-        jBBuscar.setBackground(new java.awt.Color(0, 102, 0));
-        jBBuscar.setForeground(new java.awt.Color(255, 255, 255));
-        jBBuscar.setText("BUSCAR");
-
         jcbListaAlumnos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbListaAlumnosActionPerformed(evt);
@@ -137,17 +129,11 @@ public class VistaListarInscripciones extends javax.swing.JInternalFrame {
                         .addGap(158, 158, 158)
                         .addComponent(jLIdAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
-                        .addComponent(jcbListaAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 36, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(314, 314, 314))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48))))
+                        .addComponent(jcbListaAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,11 +144,9 @@ public class VistaListarInscripciones extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLIdAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbListaAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addGap(41, 41, 41)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         pack();
@@ -174,7 +158,6 @@ public class VistaListarInscripciones extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBBuscar;
     private javax.swing.JLabel jLIdAlumno;
     private javax.swing.JLabel jLMateriasPorAlumno;
     private javax.swing.JScrollPane jScrollPane1;
